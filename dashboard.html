@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./media/style.css">
+    <link rel="stylesheet" href="media/animate.css">
+    <link rel="stylesheet" href="media/boostrap.css">
+    <link rel="stylesheet" href="media/jquery.js">
+    <link rel="stylesheet" href="media/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <title>Bienvenue</title>
+</head>
+
+<body id="body-pd">
+
+    <header class="header" id="header">
+        <div class="header_toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+        <div class="header_img">
+            <img src="https://img1.freepng.fr/20180715/zwr/kisspng-real-estate-profile-picture-icon-5b4c1135ceddd7.2742655015317117978473.jpg"
+                alt="">
+        </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="#" class="nav_logo">
+                    <i class='bx bx-layer nav_logo-icon'></i>
+                    <span class="nav_logo-name">Wall-it</span>
+                </a>
+
+
+                <div class="nav_list">
+                    <ul class="tabs">
+                        <li class="tab is-active">
+                            <a href="#" class="nav_link active" data-switcher data-tab="1">
+                                <i class="fi fi-rr-apps"></i>
+                                <span class="nav_name">Tableau de board</span>
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#" class="nav_link" data-switcher data-tab="2">
+                                <i class="fi fi-rr-users"></i>
+                                <span class="nav_name">Utilisateurs</span>
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#page_produit" class="nav_link" data-switcher data-tab="3">
+                                <i class="fi fi-rr-box open"></i>
+                                <span class="nav_name">Produits</span>
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#" class="nav_link" data-switcher data-tab="4">
+                                <i class="fi fi-rr-comment"></i>
+                                <span class="nav_name">Messages</span>
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#" class="nav_link" data-switcher data-tab="5">
+                                <i class="fi fi-rr-folder"></i>
+                                <span class="nav_name">Fichier</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <a href="#" class="nav_link">
+                <i class="fi fi-rr-exit"></i>
+                <span class="nav_name">Déconnexion</span>
+            </a>
+        </nav>
+    </div>
+
+    <section class="pages">
+
+        <div class="page is-active" data-page="1">
+            <h2>Page 1</h2>
+            <p>Welcome to the home page</p>
+        </div>
+
+
+        <div class="page" data-page="2">
+            <h2>Utilisateurs</h2>
+            <p>Bienvenue sur la page utilisateurs</p>
+        </div>
+
+
+        <div class="page" data-page="3" id="page_produit">
+                <h2>Liste des produits</h2>
+                <span>Ajouter un produit
+                    <i class='fi fi-tr-square-plus'></i>
+                </span>
+                <table id="myTable" class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Action</th>
+                    </tr>
+                </table>
+
+                    <h2>Ajouter un produit</h2> 
+                    <form id="add-product-form">
+                        <label>Nom :</label>
+                        <input type="text" name="name" required>
+                        <br>
+                        <label>Prix :</label>
+                        <input type="number" name="price" required>
+                        <br>
+                        <label>Quantité :</label>
+                        <input type="number" min="0" step="0.1" name="quantity" required>
+                        <br>
+                        <button type="submit">Ajouter</button>
+                    </form>
+        
+                    <h2>Modifier un produit</h2>
+                    <form id="update-product-form">
+                        <label>ID :</label>
+                        <input type="number" name="id" required>
+                        <br>
+                        <label>Nom :</label>
+                        <input type="text" name="name">
+                        <br>
+                        <label>Prix :</label>
+                        <input type="number" type="number" min="0" step="0.1" name="price">
+                        <br>
+                        <label>Quantité :</label>
+                        <input type="number" name="quantity">
+                        <br>
+                        <button type="submit">Modifier</button>
+                    </form>
+        
+                    <h2>Supprimer un produit</h2>
+                    <form id="delete-product-form">
+                        <label>ID :</label>
+                        <input type="number" name="id" required>
+                        <br>
+                        <button type="submit">Supprimer</button>
+                    </form>
+        </div>
+
+
+        <div class="page" data-page="4">
+            <h2>Boîte de message</h2>
+            <p>Bienvenue sur la page message</p>
+        </div>
+
+        <div class="page" data-page="5">
+            <h2>Fichier</h2>
+            <p>Bienvenue sur la page Fichier</p>
+        </div>
+    </section>
+
+    <!--Container Main start-->
+    <div class="height-100 bg-light">
+        <!-- <h4>Dashboard</h4>-->
+
+                
+
+    </div>
+    <!--Container Main end-->
+
+
+    <script src="./media/switch.js"></script>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        const caca = document.getElementById('caca');
+        const productList = document.getElementById('product-list');
+        const addProductForm = document.getElementById('add-product-form');
+        const updateProductForm = document.getElementById('update-product-form');
+        const deleteProductForm = document.getElementById('delete-product-form');
+
+        var ancre = "#page_produit";
+
+
+
+        // Afficher la liste des produits lors du chargement de la page
+        ipcRenderer.send('get-products');
+        ipcRenderer.on('product-list', (event, rows) => {
+            for (var i = 0; i < rows.length; i++) {
+                const row = "<tr><td>" + rows[i].id + "</td><td>" + rows[i].name + "</td><td>" + rows[i].price + "</td><td>" + rows[i].quantity + "</td><td>" + "<i class='fi fi-rr-trash'></i> " + " <i class='fi fi-rr-refresh'></i>" + "</td></tr>";
+                document.getElementById("myTable").innerHTML += row;
+            }
+        });
+
+
+        // Ajouter un nouveau produit
+        addProductForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = addProductForm.elements.name.value;
+            const price = addProductForm.elements.price.value;
+            const quantity = addProductForm.elements.quantity.value;
+            ipcRenderer.send('add-product', { name, price, quantity });
+            addProductForm.reset();
+        });
+        ipcRenderer.on('product-added', () => {
+            //window.location.hash = ancre;
+            window.location.reload(true);
+        });
+
+        // Mettre à jour un produit existant
+        updateProductForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const id = updateProductForm.elements.id.value;
+            const name = updateProductForm.elements.name.value;
+            const price = updateProductForm.elements.price.value;
+            const quantity = updateProductForm.elements.quantity.value;
+            ipcRenderer.send('update-product', { id, name, price, quantity });
+            updateProductForm.reset();
+        });
+        ipcRenderer.on('product-updated', () => {
+            window.location.reload(true);
+        });
+
+        // Supprimer un produit existant
+        deleteProductForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const id = deleteProductForm.elements.id.value;
+            ipcRenderer.send('delete-product', id);
+            deleteProductForm.reset();
+        });
+        ipcRenderer.on('product-deleted', () => {
+            window.location.reload(true);
+        });
+    </script>
+
+    <!-- <script src="products.js"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            const showNavbar = (toggleId, navId, bodyId, headerId) => {
+                const toggle = document.getElementById(toggleId),
+                    nav = document.getElementById(navId),
+                    bodypd = document.getElementById(bodyId),
+                    headerpd = document.getElementById(headerId)
+
+                // Validate that all variables exist
+                if (toggle && nav && bodypd && headerpd) {
+                    toggle.addEventListener('click', () => {
+                        // show navbar
+                        nav.classList.toggle('show')
+                        // change icon
+                        toggle.classList.toggle('bx-x')
+                        // add padding to body
+                        bodypd.classList.toggle('body-pd')
+                        // add padding to header
+                        headerpd.classList.toggle('body-pd')
+                    })
+                }
+            }
+
+            showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+
+            /*===== LINK ACTIVE =====*/
+            const linkColor = document.querySelectorAll('.nav_link')
+
+            function colorLink() {
+                if (linkColor) {
+                    linkColor.forEach(l => l.classList.remove('active'))
+                    this.classList.add('active')
+                }
+            }
+            linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+            // Your code to run since DOM is loaded and ready
+        });
+    </script>
+
+</body>
+
+</html>
