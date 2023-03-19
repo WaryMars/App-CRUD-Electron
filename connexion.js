@@ -3,17 +3,17 @@ const { connection } = require('./database');
 const bcrypt = require('bcrypt');
 
 const form = document.querySelector('#connexion-form');
-const usernameInput = document.querySelector('#username');
-const passwordInput = document.querySelector('#password');
+const mail_utilisateurInput = document.querySelector('#mail_utilisateur');
+const mdp_utilisateurInput = document.querySelector('#mdp_utilisateur');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const username = usernameInput.value;
-  const password = passwordInput.value;
+  const mail_utilisateur = mail_utilisateurInput.value;
+  const mdp_utilisateur = mdp_utilisateurInput.value;
 
   // Récupération du mot de passe de l'utilisateur
-  connection.query('SELECT * FROM users WHERE username = ?', [username])
+  connection.query('SELECT * FROM utilisateur WHERE mail_utilisateur = ?', [mail_utilisateur])
     .then(([rows]) => {
       if (rows.length == 0) {
         ipcRenderer.send('login-reply', { success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect.' });
@@ -23,7 +23,7 @@ form.addEventListener('submit', (event) => {
       const user = rows[0];
 
       // Vérification du mot de passe
-      bcrypt.compare(password, user.password)
+      bcrypt.compare(mdp_utilisateur, user.mdp_utilisateur)
         .then((result) => {
           if (!result) {
             ipcRenderer.send('login-reply', { success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect.' });

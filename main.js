@@ -46,21 +46,21 @@ ipcMain.on('connexion-failure', () => {
 
   // Récupérez tous les produits
   ipcMain.on('get-products', async (event, arg) => {
-      const [rows] = await connection.execute('SELECT * FROM products');
+      const [rows] = await connection.execute('SELECT * FROM produit');
       event.reply('product-list', rows);
     });
     
   // Ajoutez un nouveau produit
   ipcMain.on('add-product', async (event, product) => {
-    const { name, price, quantity } = product;
-    await connection.execute('INSERT INTO products (name, price, quantity) VALUES (?, ?, ?)', [name, price, quantity]);
+    const { nom_prod, prix, stock } = product;
+    await connection.execute('INSERT INTO produit (nom_prod, prix, stock) VALUES (?, ?, ?)', [nom_prod, prix, stock]);
     event.reply('product-added');
   });
   
   // Mettez à jour un produit existant
   ipcMain.on('update-product', async (event, product) => {
-    const { id, name, price, quantity } = product;
-    await connection.execute('UPDATE products SET name=?, price=?, quantity=? WHERE id=?', [name, price, quantity, id]);
+    const { id, nom_prod, prix, stock } = product;
+    await connection.execute('UPDATE produit SET nom_prod=?, prixe=?, stock=? WHERE id=?', [nom_prod, prix, stock, id]);
     event.reply('product-updated');
   });
   
