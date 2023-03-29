@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./media/dashboard.js">
     <link rel="stylesheet" href="./media/style.css">
     <link rel="stylesheet" href="media/animate.css">
     <link rel="stylesheet" href="media/boostrap.css">
@@ -97,37 +96,40 @@
         <div class="page" data-page="3" id="page_produit">
             <h2>Liste des produits</h2>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: black; border: none; border-radius: 50px; font-weight: 500;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"
+                style="background-color: black; border: none; border-radius: 50px; font-weight: 500;">
                 <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAALlJREFUWEftltENgzAMRM8s1i5SMQowStVF0sVqZFRRUJGPip+gXiS+HCnm3eUcQ2XLKusHaogpIkJ/SOjhVwCX958/cbPCKGT14x66ew9DNx3iGNBar4ZWBESIGUKERCgjsA697Z2OCMb4YhUYWDCm4ZkH49KwTLq9dRKeJ2soJHvNcmwzsKn+mWVOJGtQsnmnWcasJkIipAfalweqe34sw5OEHjN01I9f+z2n/LBHDTFYIiRCjACrj+jqciUN6/bBAAAAAElFTkSuQmCC" />
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAFxJREFUSEtjZKAxYKSx+QyjFhAMYZKC6P////9BJjIyMhKtj2iFIINHLSAYYUMniGAuJeglNAXYUhfWVERzC3C5fOjEwagPkENgcJVFpOYLcMlLjiZS9IxaQDC0AFaEOBlExtG1AAAAAElFTkSuQmCC" />
                 Ajouter un produit
             </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-center mb4 d-flex flex-column" id="exampleModalLabel">Ajouter un produit</h1>
+                            <h1 class="modal-title fs-5 text-center mb4 d-flex flex-column" id="exampleModalLabel">
+                                Ajouter un produit</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- <h2 class="text-center mb4 d-flex flex-column">Ajouter un produit</h2> -->
-                                <form id="add-product-form">
-                                    <label>Nom :</label>
-                                    <input type="text" name="nom_prod" class="form-control" required>
-                                    <br>
-                                    <label>Prix :</label>
-                                    <input type="number" min="0" step="0.1" name="prix" class="form-control" required>
-                                    <br>
-                                    <label>Stock :</label>
-                                    <input type="number" name="stock" class="form-control" required>
-                                    <br>
-                                    <button type="submit"  class="btn btn-primary btn-lg" style="border: none;">Ajouter</button>
-                                </form>
+
+                            <form id="add-product-form">
+                                <label>Nom :</label>
+                                <input type="text" name="nom_prod" class="form-control" required>
+
+                                <label>Prix :</label>
+                                <input type="number" min="0" step="0.1" name="prix" class="form-control" required>
+
+                                <label>Stock :</label>
+                                <input type="number" name="stock" class="form-control" required>
+                                <br>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" style="border: none;">Ajouter</button>
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Annuler</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -143,31 +145,69 @@
             </table>
 
 
+            <button><i class='fi fi-rr-edit'></i></button>
 
-            <h2>Modifier un produit</h2>
-            <form id="update-product-form">
-                <label>ID :</label>
-                <input type="number" name="id" required>
-                <br>
-                <label>Nom :</label>
-                <input type="text" name="nom_prod">
-                <br>
-                <label>Prix :</label>
-                <input type="number" type="number" min="0" step="0.1" name="prix">
-                <br>
-                <label>Stock :</label>
-                <input type="number" name="stock">
-                <br>
-                <button type="submit">Modifier</button>
-            </form>
+            <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modifier un produit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
 
-            <h2>Supprimer un produit</h2>
-            <form id="delete-product-form">
-                <label>ID :</label>
-                <input type="number" name="id" required>
-                <br>
-                <button type="submit">Supprimer</button>
-            </form>
+                            <form id="update-product-form">
+                                <label>ID :</label>
+                                <input type="number" name="id" class="form-control" required>
+
+                                <label>Nom :</label>
+                                <input type="text" name="nom_prod" class="form-control">
+
+                                <label>Prix :</label>
+                                <input type="number" type="number" min="0" step="0.1" name="prix" class="form-control">
+
+                                <label>Stock :</label>
+                                <input type="number" name="stock" class="form-control">
+                                <br>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="border: none;">Modifier</button>
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Annuler</button>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer un produit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form id="delete-product-form">
+                                <label>ID :</label>
+                                <input type="number" name="id" required>
+                                <br>
+                                <button type="submit">Supprimer</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 
@@ -183,14 +223,25 @@
     </section>
 
     <!--Container Main start-->
-    <div class="height-100 bg-light">
-        <!-- <h4>Dashboard</h4>-->
+    <!-- <div class="height-100 bg-light">
+         <h4>Dashboard</h4>
 
 
 
-    </div>
+    </div> -->
     <!--Container Main end-->
 
+    <script>
+        function getValue() {
+
+            for (var index = 0; index < rows.length; index++) {
+            var rowDel = rows[index].id.value;                 
+            }
+            //var del = document.getElementById();
+            alert(rowDel);
+
+        }
+    </script>
 
 
     <script src="./media/switch.js"></script>

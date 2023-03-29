@@ -3,17 +3,17 @@ const { connection } = require('./database');
 const bcrypt = require('bcrypt');
 
 const form = document.querySelector('#inscription-form');
-const usernameInput = document.querySelector('#username');
-const passwordInput = document.querySelector('#password');
+const mail_utilisateurInput = document.querySelector('#mail_utilisateur');
+const mdp_utilisateurInput = document.querySelector('#mdp_utilisateur');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const username = usernameInput.value;
-  const password = passwordInput.value;
+  const mail_utilisateur = mail_utilisateurInput.value;
+  const mdp_utilisateur = mdp_utilisateurInput.value;
 
   // Vérification de l'existence du nom d'utilisateur
-  connection.query('SELECT COUNT(*) AS count FROM users WHERE username = ?', [username])
+  connection.query('SELECT COUNT(*) AS count FROM utilisateur WHERE mail_utilisateur = ?', [mail_utilisateur])
     .then(([rows]) => {
       if (rows[0].count > 0) {
         ipcRenderer.send('register-reply', { success: false, message: 'Nom d\'utilisateur déjà utilisé.' });
@@ -21,10 +21,10 @@ form.addEventListener('submit', (event) => {
       }
 
       // Hachage du mot de passe
-      bcrypt.hash(password, 10)
+      bcrypt.hash(mdp_utilisateur, 10)
         .then((hash) => {
           // Insertion de l'utilisateur dans la base de données
-          return connection.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash]);
+          return connection.query('INSERT INTO utilisateur (mail_utilisateur, mdp_utilisateur) VALUES (?, ?)', [mail_utilisateur, hash]);
         })
         .then(() => {
           ipcRenderer.send('inscription-success', { success: true, message: 'Inscription réussie.' });

@@ -60,12 +60,13 @@ ipcMain.on('connexion-failure', () => {
   // Mettez à jour un produit existant
   ipcMain.on('update-product', async (event, product) => {
     const { id, nom_prod, prix, stock } = product;
-    await connection.execute('UPDATE produit SET nom_prod=?, prixe=?, stock=? WHERE id=?', [nom_prod, prix, stock, id]);
+    await connection.execute('UPDATE produit SET nom_prod=?, prix=?, stock=? WHERE id=?', [nom_prod, prix, stock, id]);
     event.reply('product-updated');
   });
   
   // Supprimez un produit existant
   ipcMain.on('delete-product', async (event, id) => {
-    await connection.execute('DELETE FROM products WHERE id=?', [id]);
+    
+    await connection.execute('DELETE FROM produit WHERE id=?', [id]);
     event.reply('product-deleted');
   });
