@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./media/style.css">
+  <link rel="stylesheet" href="media/animate.css">
+  <link rel="stylesheet" href="media/boostrap.css">
+  <link rel="stylesheet" href="media/jquery.js">
+  <link rel="stylesheet" href="media/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <title>Inscription</title>
 </head>
+
 <body>
-  <h1>Inscription</h1>
-  <form id="inscription-form">
-    <label for="mail_utilisateur">Nom d'utilisateur :</label>
-    <input type="email" id="mail_utilisateur" name="mail_utilisateur"><br>
+  <main class="container d-flex min-vh-100 justify-content-center d-flex align-items-center">
+    <form id="inscription-form" class="form-signin">
+      <h1 class="text-center mb4 d-flex flex-column">Inscription</h1>
+      <div class="form-label-group">
+        <label for="mail_utilisateur">Mail d'utilisateur:</label>
+        <input type="email" id="mail_utilisateur" name="mail_utilisateur" class="form-control"><br>
+      </div>
 
-    <label for="mdp_utilisateur">Mot de passe :</label>
-    <input type="password" id="mdp_utilisateur" name="mdp_utilisateur"><br>
+      <div class="form-label-group">
+        <label for="mdp_utilisateur">Mot de passe :</label>
+        <input type="password" id="mdp_utilisateur" name="mdp_utilisateur" class="form-control"><br>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary btn-lg" class="btn btn-default">
+          S'inscrire
+        </button>
+      </div>
 
-    <input type="submit" value="S'inscrire">
-    
-  </form>
+
+      <p class="mt-5 mb-3 text-muted text-center">© 2022-2023</p>
+      <a href="./connexion.html" class="text-center mb4 d-flex flex-column">Connexion</a>
+    </form>
+  </main>
 
   <script src="./inscription.js"></script>
 </body>
+
 </html>
