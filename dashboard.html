@@ -73,7 +73,7 @@
 
             </div>
             <a href="#" class="nav_link">
-                <i class="fi fi-rr-exit"></i>
+                <button id="logout-button"><i class="fi fi-rr-exit"></i></button>
                 <span class="nav_name">Déconnexion</span>
             </a>
         </nav>
@@ -133,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            <input type="text" id="searchInput" class="form-control" onkeyup="searchProduct()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
 
             <table id="myTable" class="table">
                 <tr>
@@ -143,6 +144,7 @@
                     <th>Action</th>
                 </tr>
             </table>
+
 
 
             <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -163,7 +165,8 @@
                                 <input type="text" name="nom_prod" id="nom_prod" class="form-control">
 
                                 <label>Prix :</label>
-                                <input type="number" type="number" min="0" step="0.01" name="prix" id="prix" class="form-control">
+                                <input type="number" type="number" min="0" step="0.01" name="prix" id="prix"
+                                    class="form-control">
 
                                 <label>Stock :</label>
                                 <input type="number" name="stock" id="stock" class="form-control">
@@ -182,6 +185,29 @@
                 </div>
             </div>
 
+
+            <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer un produit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form id="delete-product-form">
+                                <label>ID :</label>
+                                <input type="number" name="idSup" required>
+                                <br>
+                                <button type="submit">Supprimer</button>
+                            </form>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -211,16 +237,20 @@
         function getValue() {
 
             for (var index = 0; index < rows.length; index++) {
-            var rowDel = rows[index].id.value;                 
+                var rowDel = rows[index].id.value;
             }
             //var del = document.getElementById();
             alert(rowDel);
+
+            
 
         }
     </script>
 
 
-    <script src="./media/switch.js"></script>
+    <script src="./media/switch.js">
+        
+    </script>
     <script src="products.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
