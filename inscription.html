@@ -24,7 +24,7 @@
 
       <div class="form-label-group">
         <label for="mdp_utilisateur">Mot de passe :</label>
-        <input type="password" id="mdp_utilisateur" name="mdp_utilisateur" class="form-control"><br>
+        <input type="password" id="mdp_utilisateur" name="mdp_utilisateur" minlength="8" maxlength="32" pattern="^(?=.*[0-9]) (?=.*[a-z]) (?=.*[A-Z]) (?=.*[!@#%]) .*$" class="form-control"><br>
       </div>
       <div class="d-grid gap-2 col-6 mx-auto">
         <button type="submit" class="btn btn-primary btn-lg" class="btn btn-default">

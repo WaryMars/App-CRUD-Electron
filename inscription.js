@@ -17,6 +17,7 @@ form.addEventListener('submit', (event) => {
     .then(([rows]) => {
       if (rows[0].count > 0) {
         ipcRenderer.send('register-reply', { success: false, message: 'Nom d\'utilisateur déjà utilisé.' });
+        window.alert('Mail déjà utilisé.');
         return;
       }
 

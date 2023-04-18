@@ -13,7 +13,7 @@ form.addEventListener('submit', (event) => {
   const mdp_utilisateur = mdp_utilisateurInput.value;
 
   // Récupération du mot de passe de l'utilisateur
-  connection.query('SELECT * FROM utilisateur WHERE mail_utilisateur = ?', [mail_utilisateur])
+  connection.query('SELECT * FROM utilisateur WHERE admin = 1 AND mail_utilisateur = ?', [mail_utilisateur])
     .then(([rows]) => {
       if (rows.length == 0) {
         ipcRenderer.send('login-reply', { success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect.' });
@@ -39,7 +39,7 @@ form.addEventListener('submit', (event) => {
         .catch((error) => {
           console.error(error);
           ipcRenderer.send('login-reply', { success: false, message: 'Erreur lors de la connexion.' });
-          alert("Erreur lors de la connexion.");
+          //alert("Erreur lors de la connexion.");
         });
     })
     .catch((error) => {
