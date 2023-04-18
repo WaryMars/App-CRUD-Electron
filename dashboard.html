@@ -85,9 +85,9 @@
         <div class="page is-active" data-page="1">
             <h2>Dashboard</h2>
             <p>Welcome to the home page</p>
-            <div class="count_user">
+            <div class="count_user" style="background-color: antiquewhite;">
                 <i class="fi fi-rr-stats"></i>
-                <span id="count_user_text"></span>
+                <span id="count_user_text">0</span>
             </div>
         </div>
 
@@ -95,6 +95,9 @@
         <div class="page" data-page="2">
             <h2>Utilisateurs</h2>
             <p>Bienvenue sur la page utilisateurs</p>
+
+            <input type="text" id="searchInputUser" class="form-control" onkeyup="searchUser()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
+
 
             <table id="myUserTable" class="table">
                 <tr>
@@ -169,6 +172,10 @@
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAFxJREFUSEtjZKAxYKSx+QyjFhAMYZKC6P////9BJjIyMhKtj2iFIINHLSAYYUMniGAuJeglNAXYUhfWVERzC3C5fOjEwagPkENgcJVFpOYLcMlLjiZS9IxaQDC0AFaEOBlExtG1AAAAAElFTkSuQmCC" />
                 Ajouter un produit
             </button>
+
+            <input type="text" id="searchInputProduct" class="form-control" onkeyup="searchProduct()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
+
+
             <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -201,7 +208,6 @@
                 </div>
             </div>
 
-            <input type="text" id="searchInput" class="form-control" onkeyup="searchProduct()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
 
             <table id="myTable" class="table">
                 <tr>
@@ -301,19 +307,6 @@
     </div> -->
     <!--Container Main end-->
 
-    <script>
-        function getValue() {
-
-            for (var index = 0; index < rows.length; index++) {
-                var rowDel = rows[index].id.value;
-            }
-            //var del = document.getElementById();
-            alert(rowDel);
-
-            
-
-        }
-    </script>
 
 
     <script src="./media/switch.js"></script>

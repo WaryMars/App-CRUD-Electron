@@ -31,8 +31,8 @@ ipcRenderer.on('product-list', (event, rows) => {
 // Afficher la liste des clients 
 ipcRenderer.send('get-users');
 ipcRenderer.on('user-list', (event, rowsUsers) => {
-    for (let iti = 0; iti < rowsUsers.length; iti++) {
-        const rowUser = "<tr><td>" + rowsUsers[iti].id + "</td><td>" + rowsUsers[iti].identifiant_utilisateur + "</td><td>" + rowsUsers[iti].nom_utilisateur + "</td><td>" + rowsUsers[iti].prenom_utilisateur + "</td><td>" + rowsUsers[iti].mail_utilisateur + "</td><td>" + rowsUsers[iti].tel_utilisateur + "</td><td>" + rowsUsers[iti].admin + "</td><td>" + 
+    for (let index = 0; index < rowsUsers.length; index++) {
+        const rowUser = "<tr><td>" + rowsUsers[index].id + "</td><td>" + rowsUsers[index].identifiant_utilisateur + "</td><td>" + rowsUsers[index].nom_utilisateur + "</td><td>" + rowsUsers[index].prenom_utilisateur + "</td><td>" + rowsUsers[index].mail_utilisateur + "</td><td>" + rowsUsers[index].tel_utilisateur + "</td><td>" + rowsUsers[index].admin + "</td><td>" + 
         " <button type='button' class='btn btn-primary' onclick='modifierUser(this)' data-bs-toggle='modal' data-bs-target='#updateUser' class='btn-del' style='border: none; background-color: white;' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC' alt='Modifier'/></button> " +
         " <button type='button' class='btn btn-primary' onclick='SuppLigne(this)' data-bs-toggle='modal' data-bs-target='#delUser' class='btn-del' style='border: none; background-color: white;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKlJREFUSEvtlcERQDAQRZ9KlIBOlEIFlKQUOqASJjM4hJ0fIje5ZTbZ9//uJJuReGWJ86MANdABpSFkBlpgsIQqgEuQC5cjUL0FrPtFS4iKyxKpBCp+ARwXYnt/OvatJwccyqV1z6J5/nXzvgb4CtX+5Ic6UAmjS/QDLu/qaUn+HsivKbpEivAYEDJofOh0N/msl+xGZQ8USvoeX4DmbnSqkRmY3z6WHLABUDk4GfuOp84AAAAASUVORK5CYII='/> </button> " + "</td></tr>";
         document.getElementById("myUserTable").innerHTML += rowUser;
@@ -45,8 +45,8 @@ ipcRenderer.on('user-list', (event, rowsUsers) => {
 ipcRenderer.send('count-users');
 ipcRenderer.on('user-count', (event, usersCount) => {
     for (let it = 0; it < usersCount.length; it++) {
-        const rowUserCount = usersCount[it].id;
-        document.getElementById("count_user_text").textContent = "Bonjour";
+        const rowUserCount = "<span>" + usersCount[it].id + "</span>";
+        document.getElementById("count_user_text").innerHTML = rowUserCount;
        
     }
     
