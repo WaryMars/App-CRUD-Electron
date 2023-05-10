@@ -81,13 +81,32 @@
     </div>
 
     <section class="pages">
-
+        <style>
+            .count_user {
+                margin: 2% 0;
+                padding: 50px 30px;
+                border-radius: 8px;
+                width: 30%;
+                background-color: lightgrey;;
+            }
+            .count_product {
+                margin: 2% 0;
+                padding: 50px 30px;
+                border-radius: 8px;
+                width: 30%;
+                background-color: lightgrey;;
+            }
+        </style>
         <div class="page is-active" data-page="1">
             <h2>Dashboard</h2>
             <p>Welcome to the home page</p>
-            <div class="count_user" style="background-color: antiquewhite;">
+            <div class="count_user">
                 <i class="fi fi-rr-stats"></i>
                 <span id="count_user_text">0</span>
+            </div>
+            <div class="count_product">
+                <i class="fi fi-rr-stats"></i>
+                <span id="count_product_text">0</span>
             </div>
         </div>
 
@@ -96,7 +115,8 @@
             <h2>Utilisateurs</h2>
             <p>Bienvenue sur la page utilisateurs</p>
 
-            <input type="text" id="searchInputUser" class="form-control" onkeyup="searchUser()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
+            <input type="text" id="searchInputUser" class="form-control" onkeyup="searchUser()"
+                style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
 
 
             <table id="myUserTable" class="table">
@@ -113,7 +133,8 @@
             </table>
 
 
-            <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -127,24 +148,27 @@
                                 <input type="number" name="idUser" id="idUser" class="form-control" required>
 
                                 <label>Identifiant :</label>
-                                <input type="text" name="identifiant_utilisateur" id="identifiant_utilisateur" class="form-control">
- 
+                                <input type="text" name="identifiant_utilisateur" id="identifiant_utilisateur"
+                                    class="form-control">
+
                                 <label>Nom :</label>
                                 <input type="text" name="nom_utilisateur" id="nom_utilisateur" class="form-control">
 
                                 <label>Prenom :</label>
-                                <input type="text" name="prenom_utilisateur" id="prenom_utilisateur" class="form-control">
-                                
+                                <input type="text" name="prenom_utilisateur" id="prenom_utilisateur"
+                                    class="form-control">
+
                                 <label>Mail :</label>
                                 <input type="text" name="mail_utilisateur" id="mail_utilisateur" class="form-control">
-                                
+
                                 <label>Téléphone :</label>
                                 <input type="text" name="tel_utilisateur" id="tel_utilisateur" class="form-control">
 
                                 <label>Admin :</label>
-                                <input type="number" min="0" max="1" step="1" name="admin" id="admin" class="form-control">
+                                <input type="number" min="0" max="1" step="1" name="admin" id="admin"
+                                    class="form-control">
 
-                            
+
                                 <br>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary"
@@ -173,7 +197,8 @@
                 Ajouter un produit
             </button>
 
-            <input type="text" id="searchInputProduct" class="form-control" onkeyup="searchProduct()" style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
+            <input type="text" id="searchInputProduct" class="form-control" onkeyup="searchProduct()"
+                style="display: inline-block; width: 30%;" placeholder="Rechercher un produit...">
 
 
             <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -311,7 +336,7 @@
 
     <script src="./media/switch.js"></script>
     <script src="crud.js"></script>
- 
+
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
 

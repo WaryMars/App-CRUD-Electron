@@ -198,12 +198,6 @@ nav .tabs {
     list-style-type: none;
 }
 
-nav .tabs .tab a[data-switcher] {
-    /* display: block;
-    text-decoration: none;
-    color: #FFF;
-    cursor: pointer; */
-}
 
 .pages {
     margin: 100px 0;
@@ -245,5 +239,12 @@ nav .tabs .tab a[data-switcher] {
 ::-webkit-scrollbar-thumb:hover {
 
 background-color:rgb(138, 138, 138);
+
+}
+
+#logout-button{
+    background-color: transparent;
+    color: white;
+    border: none;
 
 }

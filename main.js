@@ -65,7 +65,6 @@ ipcMain.on('get-users', async (event, arg) => {
 ipcMain.on('count-users', async (event, arg) => {
   const [usersCount] = await connection.execute('SELECT COUNT(*) FROM utilisateur');
   event.reply('user-count', usersCount);
-  alert(usersCount);
 });
 
 // Ajoutez un nouveau produit
