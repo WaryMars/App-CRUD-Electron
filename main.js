@@ -7,8 +7,8 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     title: "Gestion Wall-it",
-    width: 800,
-    height: 600,
+    width: 1400,
+    height: 1007,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -63,7 +63,7 @@ ipcMain.on('get-users', async (event, arg) => {
 });
 
 ipcMain.on('count-users', async (event, arg) => {
-  const [usersCount] = await connection.execute('SELECT COUNT(*) FROM utilisateur');
+  const [usersCount] = await connection.execute('SELECT COUNT(mail_utilisateur) FROM utilisateur');
   event.reply('user-count', usersCount);
 });
 
@@ -87,12 +87,41 @@ ipcMain.on('update-user', async (event, user) => {
   event.reply('user-updated');
 });
 
-// Supprimez un produit existant
-ipcMain.on('delete-product', async (event, id) => {
+// // Supprimez un produit existant
+// ipcMain.on('delete-product', async (event, id) => {
+//   await connection.execute('DELETE FROM produit WHERE id=?', [id]);
+//   event.reply('product-deleted');
+// });
 
-  await connection.execute('DELETE FROM produit WHERE id=?', [id]);
-  event.reply('product-deleted');
+
+
+
+
+
+
+
+
+
+ipcMain.on('deleteRow', (event, rowIndex) => {
+
+  // Supprimer la ligne dans la base de données
+  const query = `DELETE FROM produit WHERE id = ?`;
+
+  connection.query(query, [rowIndex], (err, results) => {
+    if (err) {
+      console.error(err.message);
+      event.reply('deleteRowError', err.message);
+    } else {
+      event.reply('rowDeleted');
+    }
+  });
 });
+
+
+
+
+
+
 
 ipcMain.on('logout', () => {
   mainWindow.loadFile(path.join(__dirname, 'connexion.html'));

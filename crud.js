@@ -16,13 +16,31 @@ var ancre = "#page_produit";
 
 
 
+function deleteRow(rowIndex) {
+    // Demander au processus principal (Main Process) de supprimer la ligne
+    console.log(rowIndex);
+    ipcRenderer.send('deleteRow', rowIndex);
+}
+
+ipcRenderer.on('rowDeleted', () => {
+    // La ligne a été supprimée avec succès, mettre à jour l'interface utilisateur si nécessaire
+    window.location.reload(true);
+});
+
+ipcRenderer.on('deleteRowError', (event, errorMessage) => {
+    // Une erreur s'est produite lors de la suppression de la ligne, gérer l'erreur ici
+    console.error(errorMessage);
+});
+
+
+
 // Afficher la liste des produits lors du chargement de la page
 ipcRenderer.send('get-products');
 ipcRenderer.on('product-list', (event, rows) => {
     for (let i = 0; i < rows.length; i++) {
-        const row = "<tr><td>" + rows[i].id + "</td><td>" + rows[i].nom_prod + "</td><td>" + rows[i].prix + "</td><td>" + rows[i].stock + "</td><td>" + 
-        " <button type='button' class='btn btn-primary' onclick='ModLigne(this)' data-bs-toggle='modal' data-bs-target='#updateModal' class='btn-del' style='border: none; background-color: white;' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC' alt='Modifier'/></button> " +
-        " <button type='button' class='btn btn-primary' onclick='SuppLigne(this)' data-bs-toggle='modal' data-bs-target='#delModal' class='btn-del' style='border: none; background-color: white;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKlJREFUSEvtlcERQDAQRZ9KlIBOlEIFlKQUOqASJjM4hJ0fIje5ZTbZ9//uJJuReGWJ86MANdABpSFkBlpgsIQqgEuQC5cjUL0FrPtFS4iKyxKpBCp+ARwXYnt/OvatJwccyqV1z6J5/nXzvgb4CtX+5Ic6UAmjS/QDLu/qaUn+HsivKbpEivAYEDJofOh0N/msl+xGZQ8USvoeX4DmbnSqkRmY3z6WHLABUDk4GfuOp84AAAAASUVORK5CYII='/> </button> " + "</td></tr>";
+        const row = "<tr><td>" + rows[i].id + "</td><td>" + rows[i].nom_prod + "</td><td>" + rows[i].prix + "</td><td>" + rows[i].stock + "</td><td>" +
+            " <button type='button' class='btn btn-primary' onclick='ModLigne(this)' data-bs-toggle='modal' data-bs-target='#updateModal' class='btn-del' style='border: none; background-color: white;' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC' alt='Modifier'/></button> " +
+            " <button type='button' class='btn btn-primary' onclick='deleteRow(this)' class='btn-del' style='border: none; background-color: white;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKlJREFUSEvtlcERQDAQRZ9KlIBOlEIFlKQUOqASJjM4hJ0fIje5ZTbZ9//uJJuReGWJ86MANdABpSFkBlpgsIQqgEuQC5cjUL0FrPtFS4iKyxKpBCp+ARwXYnt/OvatJwccyqV1z6J5/nXzvgb4CtX+5Ic6UAmjS/QDLu/qaUn+HsivKbpEivAYEDJofOh0N/msl+xGZQ8USvoeX4DmbnSqkRmY3z6WHLABUDk4GfuOp84AAAAASUVORK5CYII='/> </button> " + "</td></tr>";
         document.getElementById("myTable").innerHTML += row;
         document.getElementById("count_user_text").innerHTML = "<span>" + rows[i].id + "</span>";
 
@@ -34,40 +52,40 @@ ipcRenderer.on('product-list', (event, rows) => {
 ipcRenderer.send('get-users');
 ipcRenderer.on('user-list', (event, rowsUsers) => {
     for (let index = 0; index < rowsUsers.length; index++) {
-        const rowUser = "<tr><td>" + rowsUsers[index].id + "</td><td>" + rowsUsers[index].identifiant_utilisateur + "</td><td>" + rowsUsers[index].nom_utilisateur + "</td><td>" + rowsUsers[index].prenom_utilisateur + "</td><td>" + rowsUsers[index].mail_utilisateur + "</td><td>" + rowsUsers[index].tel_utilisateur + "</td><td>" + rowsUsers[index].admin + "</td><td>" + 
-        " <button type='button' class='btn btn-primary' onclick='modifierUser(this)' data-bs-toggle='modal' data-bs-target='#updateUser' class='btn-del' style='border: none; background-color: white;' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC' alt='Modifier'/></button> " +
-        " <button type='button' class='btn btn-primary' onclick='SuppLigne(this)' data-bs-toggle='modal' data-bs-target='#delUser' class='btn-del' style='border: none; background-color: white;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKlJREFUSEvtlcERQDAQRZ9KlIBOlEIFlKQUOqASJjM4hJ0fIje5ZTbZ9//uJJuReGWJ86MANdABpSFkBlpgsIQqgEuQC5cjUL0FrPtFS4iKyxKpBCp+ARwXYnt/OvatJwccyqV1z6J5/nXzvgb4CtX+5Ic6UAmjS/QDLu/qaUn+HsivKbpEivAYEDJofOh0N/msl+xGZQ8USvoeX4DmbnSqkRmY3z6WHLABUDk4GfuOp84AAAAASUVORK5CYII='/> </button> " + "</td></tr>";
+        const rowUser = "<tr><td>" + rowsUsers[index].id + "</td><td>" + rowsUsers[index].identifiant_utilisateur + "</td><td>" + rowsUsers[index].nom_utilisateur + "</td><td>" + rowsUsers[index].prenom_utilisateur + "</td><td>" + rowsUsers[index].mail_utilisateur + "</td><td>" + rowsUsers[index].tel_utilisateur + "</td><td>" + rowsUsers[index].admin + "</td><td>" +
+            " <button type='button' class='btn btn-primary' onclick='modifierUser(this)' data-bs-toggle='modal' data-bs-target='#updateUser' class='btn-del' style='border: none; background-color: white;' ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAN1JREFUSEvFlO0NwjAMBa8bwCQwAkzCKjACE8EIsAkbgJ6USKEkdj5a0T+V2vQufnY6sfI1rcxnRLABToDuV+CV22yvQNAbsA/QB3DMSXoEKfwZBDsgK2kVzOGHILgDklyAcxpVi6AUi3gxrm6BFYsE6oXiUkVfza6pwItFgixcLzxBDq4dlp7/TKolGIZbFSwCLwkWg5cEOjCa6bRx1ZnPm5DrwTss2oaR64aXKogCyYfgniCttjjn3u/eiih+2w2vOWjeBt333kl2Ad6Cmog8hjmZfxG07thcv3oPPg35Shmq75wnAAAAAElFTkSuQmCC' alt='Modifier'/></button> " +
+            " <button type='button' class='btn btn-primary' onclick='SuppLigne(this)' data-bs-toggle='modal' data-bs-target='#delUser' class='btn-del' style='border: none; background-color: white;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKlJREFUSEvtlcERQDAQRZ9KlIBOlEIFlKQUOqASJjM4hJ0fIje5ZTbZ9//uJJuReGWJ86MANdABpSFkBlpgsIQqgEuQC5cjUL0FrPtFS4iKyxKpBCp+ARwXYnt/OvatJwccyqV1z6J5/nXzvgb4CtX+5Ic6UAmjS/QDLu/qaUn+HsivKbpEivAYEDJofOh0N/msl+xGZQ8USvoeX4DmbnSqkRmY3z6WHLABUDk4GfuOp84AAAAASUVORK5CYII='/> </button> " + "</td></tr>";
         document.getElementById("myUserTable").innerHTML += rowUser;
         // alert(rowUser)
     }
-    
+
 });
 
 
 
-function ModLigne(lig){
-        
-    boolMod =true;
+function ModLigne(lig) {
+
+    boolMod = true;
     // Fait référence à l'element parent de l'élèment cliqué
     selectLig = lig.parentElement.parentElement;
     document.getElementById("idProduct").value = selectLig.cells[0].innerHTML;
     document.getElementById("nom_prod").value = selectLig.cells[1].innerHTML;
     document.getElementById("prix").value = selectLig.cells[2].innerHTML;
-    document.getElementById("stock").value = selectLig.cells[3].innerHTML;    
+    document.getElementById("stock").value = selectLig.cells[3].innerHTML;
 }
 
-function modifierUser(line){
-        
-    boolMod =true;
+function modifierUser(line) {
+
+    boolMod = true;
     // Fait référence à l'element parent de l'élèment cliqué
     selectLig = line.parentElement.parentElement;
     document.getElementById("idUser").value = selectLig.cells[0].innerHTML;
     document.getElementById("identifiant_utilisateur").value = selectLig.cells[1].innerHTML;
     document.getElementById("nom_utilisateur").value = selectLig.cells[2].innerHTML;
-    document.getElementById("prenom_utilisateur").value = selectLig.cells[3].innerHTML; 
-    document.getElementById("mail_utilisateur").value = selectLig.cells[4].innerHTML; 
-    document.getElementById("tel_utilisateur").value = selectLig.cells[5].innerHTML; 
-    document.getElementById("admin").value = selectLig.cells[6].innerHTML;    
+    document.getElementById("prenom_utilisateur").value = selectLig.cells[3].innerHTML;
+    document.getElementById("mail_utilisateur").value = selectLig.cells[4].innerHTML;
+    document.getElementById("tel_utilisateur").value = selectLig.cells[5].innerHTML;
+    document.getElementById("admin").value = selectLig.cells[6].innerHTML;
 }
 
 
@@ -75,7 +93,7 @@ function SuppLigne(r) {
     // Supprimer le contenu HTML d'un élément ici une lgne de la table
     var supp = r.parentNode.parentNode.rowIndex;
     document.getElementById("myTable").deleteRow(supp);
-    
+
 }
 
 // Ajouter un nouveau produit
@@ -137,5 +155,5 @@ ipcRenderer.on('product-deleted', () => {
 });
 
 logoutButton.addEventListener('click', () => {
-  ipcRenderer.send('logout');
+    ipcRenderer.send('logout');
 });
