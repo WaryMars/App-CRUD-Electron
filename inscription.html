@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./media/style.css">
+  <link rel="stylesheet" href="media/animate.css">
+  <link rel="stylesheet" href="media/boostrap.css">
+  <link rel="stylesheet" href="media/jquery.js">
+  <link rel="stylesheet" href="media/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <title>Inscription</title>
+</head>
+
+
+<style>
+  body {
+    padding: 10% 15%;
+  }
+
+  .btn-outline-secondary:hover {
+    cursor: pointer;
+    color: #ff4754;
+  }
+
+  .btn-outline-secondary {
+    --bs-btn-hover-color: none;
+    --bs-btn-hover-bg: none;
+    --bs-btn-active-bg: none;
+  }
+
+  .btn .fi-rr-eye-crossed {
+    display: none;
+  }
+
+.dropdown li {
+    cursor: pointer;
+    list-style-type: none;
+    height: 50px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.dropdown li span {
+    font-weight: bold;
+}
+.dropdown li:hover {
+    background-color: lightsteelblue;
+}
+.dropdown ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+/* .panel {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.panel input[type=text] {
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid lightgray;
+    font-size: 15px;
+} */
+</style>
+
+<body>
+
+  <main class="container justify-content-center d-flex align-items-center">
+    <!-- <form id="inscription-form" class="form-signin" > -->
+
+    <form id="inscription-form" class="row g-3">
+      <h1 class="text-center mb4 d-flex flex-column">Inscription</h1>
+      <div class="col-md-12">
+        <div class="row g-3">
+          <div class="col">
+            <label for="inputNom" class="form-label">Nom</label>
+            <input type="text" class="form-control" placeholder="Nom" aria-label="Nom">
+          </div>
+          <div class="col">
+            <label for="inputPrenom" class="form-label">Prénom</label>
+            <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail">
+      </div>
+      <div class="col-5">
+        <label for="dresse" class="form-label">Adresse</label>
+        <input type="text" class="form-control" name="adresse" id="adresse" placeholder="1234 Main St">
+        <div id="selection" style="display: none;" class="form-select dropdown">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <label for="Ville" class="form-label">Ville</label>
+        <input type="text" class="form-control" id="Ville" disabled>
+      </div>
+      <div class="col-md-2">
+        <label for="CP" class="form-label">Code Postale</label>
+        <input type="text" class="form-control" id="CP" disabled>
+      </div>
+      <div class="col-md-12">
+        <label for="mdp_utilisateur">Mot de passe</label>
+        <div class="input-group mb-3">
+          <input type="password" id="mdp_utilisateur" name="mdp_utilisateur"  class="form-control">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="padding: 6px; width: 52px;"> <i class="fi fi-rr-eye-crossed"></i>
+            <i class="fi fi-rr-eye"></i>
+          </button>
+        </div>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary btn-lg" class="btn btn-default">
+          S'inscrire
+        </button>
+      </div>
+
+
+      <p class="mt-5 mb-3 text-muted text-center">© 2022-2023</p>
+      <a href="./connexion.html" class="text-center mb4 d-flex flex-column">Connexion</a>
+    </form>
+  </main>
+
+
+
+  <script>
+    const eye = document.querySelector(".fi-rr-eye");
+    const eyeoff = document.querySelector(".fi-rr-eye-crossed");
+    const passwordField = document.querySelector("input[type=password]");
+
+    // alert(document.querySelector(".feather-eye"))
+
+    eye.addEventListener("click", () => {
+      eye.style.display = "none";
+      eyeoff.style.display = "block";
+      passwordField.type = "text";
+    });
+
+    eyeoff.addEventListener("click", () => {
+      eyeoff.style.display = "none";
+      eye.style.display = "block";
+      passwordField.type = "password";
+    });
+  </script>
+
+
+<script type="text/javascript">
+  //API pour trouver tous les adresses de France et des DOM TOM
+    var requestURL = 'https://api-adresse.data.gouv.fr/search/?q=';
+    var select = document.getElementById("selection");
+    window.onload = function() {
+        document.getElementById("adresse").addEventListener("input", autocompleteAdresse, false);
+    };
+    function displaySelection(response) {
+        if (Object.keys(response.features).length > 0) {
+            select.style.display = "block";
+            select.removeChild(select.firstChild);
+            var ul = document.createElement('ul');
+            select.appendChild(ul);
+            response.features.forEach(function (element) {
+                var li = document.createElement('li');
+                var ligneAdresse = document.createElement('span');
+                var infosAdresse = document.createTextNode(element.properties.postcode + ' ' + element.properties.city);
+                ligneAdresse.innerHTML = element.properties.name;
+                li.onclick = function () { selectAdresse(element); };
+                li.appendChild(ligneAdresse);
+                li.appendChild(infosAdresse);
+                ul.appendChild(li);
+            });
+        } else {
+            select.style.display = "none";
+        }
+    }
+    function autocompleteAdresse() {
+        var inputValue = document.getElementById("adresse").value;
+        if (inputValue) {
+            fetch(setQuery(inputValue))
+                .then(function (response) {
+                    response.json().then(function (data) {
+                        displaySelection(data);
+                    });
+                });
+        } else {
+            select.style.display = "none";
+        }
+    };
+    function selectAdresse(element) {
+        document.getElementById("adresse").value = element.properties.name + "\r\n" + element.properties.postcode + " " + element.properties.city;
+        select.style.display = "none";
+        document.getElementById("adresse").value = element.properties.name;
+        document.getElementById("CP").value = element.properties.postcode;
+        document.getElementById("Ville").value = element.properties.city;
+    }
+    function setQuery(value) {
+        return requestURL + value + "?type=housenumber&autocomplete=1";
+    }
+</script>
+
+  <script src="./inscription.js"></script>
+  <!-- ICON SCRIPT -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+
+</html>
