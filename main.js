@@ -87,47 +87,22 @@ ipcMain.on('update-user', async (event, user) => {
   event.reply('user-updated');
 });
 
-// // Supprimez un produit existant
-// ipcMain.on('delete-product', async (event, id) => {
-//   await connection.execute('DELETE FROM produit WHERE id=?', [id]);
-//   event.reply('product-deleted');
-// });
 
 
-
-
-
-
-
-
-
-
-ipcMain.on('deleteRow', (event, rowIndex) => {
-
-  // Supprimer la ligne dans la base de données
-  const query = `DELETE FROM produit WHERE id = ?`;
-
-  connection.query(query, [rowIndex], (err, results) => {
-    if (err) {
-      console.error(err.message);
-      event.reply('deleteRowError', err.message);
-    } else {
-      event.reply('rowDeleted');
-    }
-  });
+ipcMain.on('delete', async (event, product) => {
+  const  {id}  = product;
+  await connection.execute('DELETE FROM produit WHERE id= ?', [id]);
+  event.reply('product-deleted');
 });
 
 
-
-
-
+ipcMain.on('delete-user', async (event, user) => {
+  const  {id}  = user;
+  await connection.execute('DELETE FROM utilisateur WHERE id= ?', [id]);
+  event.reply('user-deleted');
+});
 
 
 ipcMain.on('logout', () => {
   mainWindow.loadFile(path.join(__dirname, 'connexion.html'));
 });
-
-
-
-
-

@@ -185,6 +185,35 @@
                 </div>
             </div>
 
+
+
+
+            <div class="modal fade" id="delUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer un produit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form id="delete-user-form">
+                                <label>ID :</label>
+                                <input type="number" name="id_User" id="id_User" class="form-control" required>
+                                <br>
+                                <button type="submit" class="btn btn-primary"
+                                style="border: none;">Supprimer</button>
+                            </form>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
 
 
@@ -237,7 +266,7 @@
 
             <table id="myTable" class="table">
                 <tr>
-                    <th>ID</th>
+                    <th id="id-ligne">ID</th>
                     <th>Nom</th>
                     <th>Prix</th>
                     <th>Stock</th>
@@ -285,7 +314,7 @@
                 </div>
             </div>
 
-
+            <!-- Modal pour la suppression -->
             <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -297,14 +326,12 @@
 
                             <form id="delete-product-form">
                                 <label>ID :</label>
-                                <input type="number" name="idSup" required>
+                                <input type="number" name="id_Product" id="id_Product" class="form-control" required>
                                 <br>
-                                <button type="submit">Supprimer</button>
+                                <button type="submit" class="btn btn-primary"
+                                style="border: none;">Supprimer</button>
                             </form>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
